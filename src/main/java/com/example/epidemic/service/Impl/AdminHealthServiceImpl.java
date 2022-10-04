@@ -19,6 +19,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -35,10 +36,15 @@ public class AdminHealthServiceImpl implements AdminHealthService {
 
     @Override
     public ResultBean add(AdminHealth adminHealth) {
-        if (adminHealthDao.add(adminHealth) > 0) {
-            return ResultBean.ok();
-        }else {
-            return ResultBean.fail();
+        adminHealth.setCtime(new Date());
+        try {
+            if (adminHealthDao.add(adminHealth) > 0) {
+                return ResultBean.ok();
+            }else {
+                return ResultBean.fail();
+            }
+        }catch (Exception e){
+            return ResultBean.fail("管理员ID可能不存在");
         }
     }
 

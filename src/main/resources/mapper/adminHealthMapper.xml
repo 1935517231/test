@@ -40,8 +40,8 @@
     </insert>
 
     <select id="selectByName" resultMap="AdminHealthDtoBaseResult">
-        select ad.id, ad.name, ad.phone, aa.temperature, aa.nucleic_acid, aa.health_code, aa.ctime, aa.flag
-        from a_admin ad inner join a_adminhealth aa on ad.id = aa.aid
+        select aa.id, ad.name, ad.phone, aa.temperature, aa.nucleic_acid, aa.health_code, aa.ctime, aa.flag
+        from a_admin ad left join a_adminhealth aa on ad.id = aa.aid
         <where>
             <if test="name != null and name != ''"> and ad.name like #{name} </if>
         </where>
@@ -59,7 +59,7 @@
         )
     </delete>
 
-    <update id="update">
+    <update id="update" parameterType="com.example.epidemic.dto.AdminHealthDto">
         update a_adminhealth
         <set>
             <if test="id != null" >id = #{id},</if>
@@ -68,7 +68,7 @@
             <if test="nucleic_acid != null  and nucleic_acid != ''" >nucleic_acid = #{nucleic_acid},</if>
             <if test="health_code != null and health_code != ''">health_code = #{health_code},</if>
             <if test="ctime != null ">ctime = #{ctime},</if>
-            <if test="flag != null and flag != ''">flag = #{flag},</if>
+            <if test="flag != null">flag = #{flag},</if>
         </set>
         where id = #{id}
     </update>
