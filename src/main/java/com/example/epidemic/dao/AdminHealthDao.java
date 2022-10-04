@@ -6,6 +6,7 @@ import com.example.epidemic.dto.AdminHealthDto;
 import com.example.epidemic.entity.AdminHealth;
 import com.example.epidemic.excel.AdminHealthExcel;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -39,7 +40,7 @@ public interface AdminHealthDao {
     /**
      * 根据用户名模糊查询
      */
-    List<AdminHealthDto> selectByName(String name);
+    List<AdminHealthDto> selectByName(@Param("name") String name);
 
     /**
      * 批量删除

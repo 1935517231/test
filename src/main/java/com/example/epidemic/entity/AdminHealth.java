@@ -27,7 +27,7 @@ public class AdminHealth {
     /** 健康码 */
     private String health_code ;
     /** 创建时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GTM + 8")
     private Date ctime ;
     /** 14天内是否去过中高风险地区 */
     private String flag ;

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.epidemic.dao.AdminDao">
+
     <resultMap id="BaseResult" type="com.example.epidemic.entity.Admin">
         <id column="id" property="id"></id>
         <result column="name" property="name"></result>
@@ -58,6 +59,13 @@
 
     <select id="selectTotal">
         select count(id) from a_admin
+    </select>
+
+    <select id="selectTj" resultType="com.example.epidemic.dto.AdminCountDto">
+        <!--要注意返回的字段名要和自定义类的属性名一样。
+        并且返回自定义的类时，要使用resulttype；
+        resultmap使用的条件是必须要有标签指明id和返回类型以及表字段的对应关系-->
+        select flag,count(id) as num from a_admin group by flag
     </select>
 
     <delete id="del">
