@@ -22,11 +22,11 @@ public class UserNucleate {
     /** uid */
     private Integer uId ;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")//指定JSON转换的日期格式
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GTM + 8")//指定JSON转换的日期格式
     @DateTimeFormat(pattern = "yyyy-MM-dd ")//接受日期参数
     private Date collectTime ;
     /** 检测时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")//指定JSON转换的日期格式
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GTM + 8")//指定JSON转换的日期格式
     @DateTimeFormat(pattern = "yyyy-MM-dd ")//接受日期参数
     private Date testTime ;
     /** 加测结果,1为阴,2为阳 */

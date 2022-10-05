@@ -52,7 +52,7 @@ public class User {
      * 状态 1为在住,2为不在住
      */
     private Integer flag;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GTM + 8")
     private Date ctime;
 
     public User(String name, String password, String phone, String idCard, Integer age, Integer sex, String origin, String address, Integer flag) {

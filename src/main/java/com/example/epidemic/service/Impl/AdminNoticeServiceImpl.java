@@ -18,6 +18,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -34,6 +35,7 @@ public class AdminNoticeServiceImpl implements AdminNoticeService {
 
     @Override
     public ResultBean add(AdminNotice admin) {
+        admin.setCtime(new Date());
         if (adminDao.add(admin) > 0) {
             return ResultBean.ok();
         }else {

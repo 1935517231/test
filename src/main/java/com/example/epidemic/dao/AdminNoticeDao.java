@@ -5,6 +5,7 @@ package com.example.epidemic.dao;
 import com.example.epidemic.entity.AdminNotice;
 import com.example.epidemic.excel.AdminNoticeExcel;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -38,7 +39,7 @@ public interface AdminNoticeDao {
     /**
      * 根据用户名模糊查询
      */
-    List<AdminNotice> selectById(String title);
+    List<AdminNotice> selectById(@Param("title") String title);
 
     /**
      * 批量删除

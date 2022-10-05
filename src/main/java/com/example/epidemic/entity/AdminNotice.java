@@ -22,7 +22,7 @@ public class AdminNotice {
     /** 内容 */
     private String content ;
     /** 创建时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date ctime ;
     /** 发起人 */
     private String aname ;

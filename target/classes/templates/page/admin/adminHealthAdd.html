@@ -73,7 +73,7 @@
                     location.href = "adminHealthList.html";
                 }else{
                     //新增失败
-                    layer.msg('新增失败！');
+                    layer.msg('新增失败！' + res.msg);
                 }
             });
             return false;

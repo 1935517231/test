@@ -29,11 +29,11 @@ public class UserHeatlth {
     /** 体温自查 */
     private String selTemp ;
     /** 体温自查时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")//指定JSON转换的日期格式
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GTM + 8")//指定JSON转换的日期格式
     @DateTimeFormat(pattern = "yyyy-MM-dd ")//接受日期参数
     private Date selTempTime ;
     /** 体温被查时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss ")//指定JSON转换的日期格式
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss ",timezone = "GTM + 8")//指定JSON转换的日期格式
     @DateTimeFormat(pattern = "yyyy-MM-dd ")//接受日期参数
     private Date byTempTime ;
     /** 体温被查 */

@@ -22,7 +22,7 @@ public class GoodsApprove {
     /** 单位 */
     private String unit ;
     /** 时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GTM + 8")
     private Date time ;
     /** 状态表示符;默认为1有效 */
     private Integer state ;

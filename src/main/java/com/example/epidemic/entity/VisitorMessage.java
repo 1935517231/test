@@ -18,7 +18,7 @@ public class VisitorMessage {
     /** 留言 */
     private String message ;
     /** 留言时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GTM + 8")
     private Date ctime ;
     /** 状态
      * 0 正常

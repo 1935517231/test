@@ -22,7 +22,7 @@ public class AdminMessage {
     /** 用户需求内容 */
     private String comment ;
     /** 创建时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GTM + 8")
     private Date ctime ;
     /** 状态
      * 1表示已解决

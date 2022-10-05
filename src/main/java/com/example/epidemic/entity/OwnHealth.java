@@ -22,7 +22,7 @@ public class OwnHealth {
     /** 体温 */
     private Double temp ;
     /** 创建时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GTM + 8")
     private Date ctime ;
     /**状态   1表示正常   2表示异常 */
     private String flag ;

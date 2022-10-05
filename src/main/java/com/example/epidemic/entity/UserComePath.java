@@ -28,7 +28,7 @@ public class UserComePath {
     /** 出发地 */
     private String outLocation ;
     /** 出发时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")//指定JSON转换的日期格式
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GTM + 8")//指定JSON转换的日期格式
     @DateTimeFormat(pattern = "yyyy-MM-dd ")//接受日期参数
     private String goTime ;
     /** 交通方式 */

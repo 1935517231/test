@@ -24,7 +24,7 @@ public class GoodsPurchase {
     /** 花费金额 */
     private Double gp_money ;
     /** 日期 */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GTM + 8")
     private Date gp_time ;
     /** 状态;表示这条数据是否有效，默认为1有效 */
     private Integer gp_state ;

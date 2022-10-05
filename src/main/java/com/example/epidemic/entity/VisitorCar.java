@@ -18,7 +18,7 @@ public class VisitorCar {
     /** 车牌号 */
     private String license ;
     /** 进入时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GTM + 8")
     private Date ctime ;
     /** 车辆停放位置 */
     private String position ;

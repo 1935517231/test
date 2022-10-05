@@ -22,6 +22,6 @@ public class GoodsLog {
     /** 操作人 */
     private String username ;
     /** 时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GTM + 8")
     private Date time ;
 }

@@ -24,7 +24,7 @@ public class Goods {
     /** 物资状态 */
     private Integer g_st_id ;
     /** 修改时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GTM + 8")
     private Date g_ctime ;
 
 }
