@@ -15,6 +15,64 @@
         <result column="flag" property="flag"></result>
     </resultMap>
 
+
+    <resultMap id="NoticeBaseResult" type="com.example.epidemic.entity.AdminNotice">
+        <id column="id" property="id"></id>
+        <result column="title" property="title"></result>
+        <result column="content" property="content"></result>
+        <result column="ctime" property="ctime"></result>
+        <result column="aname" property="aname"></result>
+        <result column="flag" property="flag"></result>
+    </resultMap>
+
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user(name, password, phone, idcard, age, sex, origin, address, ctime, flag)
+        values (#{name},#{password},#{phone},#{idCard},#{age},#{sex},#{origin},#{address},#{ctime},#{flag})
+    </insert>
+
+    <insert id="addBatch" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user(name, password, phone, idcard, age, sex, origin, address, ctime, flag)
+        values
+        <foreach collection="list" separator="," item="User">
+            (#{name},#{password},#{phone},#{idCard},#{age},#{sex},#{origin},#{address},#{ctime},#{flag})
+        </foreach>
+    </insert>
+
+    <insert id="addMessage" parameterType="AdminMessage" keyProperty="id" useGeneratedKeys="true">
+        insert into a_adminmessage(uid, comment, ctime, flag)
+        values (#{uid},#{comment},#{ctime},#{flag})
+    </insert>
+
+    <delete id="del">
+        delete from t_user where id = #{id}
+    </delete>
+
+    <delete id="delBatch">
+        delete from t_user where id in (
+            <foreach collection="ids" item="id" separator=",">
+                #{id}
+            </foreach>
+            )
+    </delete>
+
+    <update id="update">
+        update t_user
+        <set>
+            <if test="id != null">id = #{id},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="password != null and password != ''">password = #{password},</if>
+            <if test="phone != null and phone != ''">phone = #{phone},</if>
+            <if test="idCard != null and idCard != ''">idcard = #{idCard},</if>
+            <if test="age != null and age!= 0">age = #{age},</if>
+            <if test="sex != null and sex!= 0">sex = #{sex},</if>
+            <if test="origin != null and origin != ''">origin = #{origin},</if>
+            <if test="address != null and address != ''">address = #{address},</if>
+            <if test="ctime != null ">ctime = #{ctime},</if>
+            <if test="flag != null">flag = #{flag},</if>
+        </set>
+        where id = #{id}
+    </update>
+
     <select id="login"  resultMap="BaseResult">
         select *
         from t_user
@@ -26,12 +84,32 @@
         from t_user;
     </select>
 
+    <select id="selectWhere" resultMap="BaseResult">
+        select * from t_user
+        <where>
+            <if test="name != null and name != ''">and name like #{name}</if>
+            <!--sex是int类型，初始值为0，自己定义的取值是1或2，所以要做非0判断-->
+            <if test="sex != null and sex != 0">and sex = #{sex}</if>
+        </where>
+    </select>
 
-    <insert id="add" parameterType="com.example.epidemic.entity.User" keyProperty="id" useGeneratedKeys="true">
-        insert into t_user(name, password, phone, idcard, age, sex, origin, address, ctime, flag)
-        VALUES
-        (#{name} , #{password} , #{phone} , #{idCard} , #{age} , #{sex} , #{origin} , #{address} , #{ctime} , #{flag});
-    </insert>
+    <select id="selectTj" resultType="com.example.epidemic.dto.UserCountDto">
+        <!--注意返回值的名字要和类的属性名对应（在没有写映射的情况下）-->
+        select address , count(id) as num from t_user group by address
+    </select>
+
+    <select id="userTotal">
+        select count(id) from t_user
+    </select>
+
+    <select id="selectNotice" resultMap="NoticeBaseResult">
+        select * from a_adminnotice
+        <where>
+            <if test="title != null and title !=''">and title like #{title}</if>
+        </where>
+    </select>
+
+
 
 
 </mapper>

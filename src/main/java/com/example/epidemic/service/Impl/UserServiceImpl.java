@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -91,6 +92,7 @@ public class UserServiceImpl implements UserService {
         String key = "V1oI3GzV3xkqhQsBmaYapw==";
         String pass = PassUtils.aesenc(key, user.getPassword());
         user.setPassword(pass);
+        user.setCtime(new Date());
         log.info(user.toString());
         if (dao.add(user) > 0) {
             return ResultBean.ok();
