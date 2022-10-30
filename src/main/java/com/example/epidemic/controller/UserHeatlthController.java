@@ -65,7 +65,8 @@ public class UserHeatlthController {
     @GetMapping("pagewhere.do")
     public PageBean page(String name,int page,int limit){
         System.out.println("pagewhere");
-
+        System.out.println(page);
+        System.out.println(limit);
         PageBean pageBean = service.queryPageWhere(name, page, limit);
         System.out.println(pageBean);
         return pageBean;

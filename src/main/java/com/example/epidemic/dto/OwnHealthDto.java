@@ -20,6 +20,7 @@ public class OwnHealthDto {
     /** 用户id */
     private Integer uid ;
 
+    /** 居民姓名*/
     private String name;
     /** 体温 */
     private Double temp ;

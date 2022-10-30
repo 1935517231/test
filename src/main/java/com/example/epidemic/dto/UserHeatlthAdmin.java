@@ -22,8 +22,9 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserHeatlthAdmin {
-    private String name;
     private Integer id ;
+    /**居民姓名*/
+    private String name;
     /** 用户的id */
     private Integer uId ;
     /** 身体状况 */

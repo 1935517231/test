@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.epidemic.dao.AdminHealthDao">
+
+    <resultMap id="BaseResult" type="AdminHealth">
+        <id column="id" property="id"></id>
+        <result column="aid" property="aid"></result>
+        <result column="temperature" property="temperature"></result>
+        <result column="nucleic_acid" property="nucleic_acid"></result>
+        <result column="health_code" property="health_code"></result>
+        <result column="ctime" property="ctime"></result>
+        <result column="flag" property="flag"></result>
+    </resultMap>
+    <!--
+    数据库命名形式为：字母(含数字)_字母(含数字)这种情况，自动映射就会失效.需要自己写映射
+    -->
+    <resultMap id="AdminHealthDtoBaseResult" type="com.example.epidemic.dto.AdminHealthDto">
+        <id column="id" property="id"></id>
+        <result column="aid" property="aid"></result>
+        <result column="temperature" property="temperature"></result>
+        <result column="nucleic_acid" property="nucleic_acid"></result>
+        <result column="health_code" property="health_code"></result>
+        <result column="ctime" property="ctime"></result>
+        <result column="flag" property="flag"></result>
+        <result column="name" property="name"></result>
+        <result column="phone" property="phone"></result>
+    </resultMap>
+    
+    <insert id="add" useGeneratedKeys="true" parameterType="AdminHealth">
+        insert into a_adminhealth(aid, temperature, nucleic_acid, health_code, ctime, flag)
+        VALUES (#{aid},#{temperature},#{nucleic_acid},#{health_code},#{ctime},#{flag})
+    </insert>
+
+    <insert id="addBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into a_adminhealth(aid, temperature, nucleic_acid, health_code, ctime, flag)
+        VALUES
+        <foreach collection="list" item="admin" separator=",">
+            (#{aid},#{temperature},#{nucleic_acid},#{health_code},#{ctime},#{flag})
+        </foreach>
+    </insert>
+
+    <select id="selectByName" resultMap="AdminHealthDtoBaseResult">
+        select aa.id, ad.name, ad.phone, aa.temperature, aa.nucleic_acid, aa.health_code, aa.ctime, aa.flag
+        from a_admin ad left join a_adminhealth aa on ad.id = aa.aid
+        <where>
+            <if test="name != null and name != ''"> and ad.name like #{name} </if>
+        </where>
+    </select>
+
+    <delete id="del">
+        delete from a_adminhealth where id = #{id}
+    </delete>
+
+    <delete id="delBatch">
+        delete from a_adminhealth where id in(
+        <foreach collection="ids" item="id" separator=",">
+            #{id}
+        </foreach>
+        )
+    </delete>
+
+    <update id="update" parameterType="com.example.epidemic.dto.AdminHealthDto">
+        update a_adminhealth
+        <set>
+            <if test="id != null" >id = #{id},</if>
+            <if test="aid != null">aid = #{aid},</if>
+            <if test="temperature != null">temperature = #{temperature},</if>
+            <if test="nucleic_acid != null  and nucleic_acid != ''" >nucleic_acid = #{nucleic_acid},</if>
+            <if test="health_code != null and health_code != ''">health_code = #{health_code},</if>
+            <if test="ctime != null ">ctime = #{ctime},</if>
+            <if test="flag != null">flag = #{flag},</if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>

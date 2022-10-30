@@ -2,7 +2,6 @@ package com.example.epidemic.controller;
 
 import com.alibaba.excel.EasyExcel;
 import com.example.epidemic.entity.Admin;
-import com.example.epidemic.service.Impl.AdminServiceImpl;
 import com.example.epidemic.service.Interface.AdminService;
 import com.example.epidemic.vo.PageBean;
 import com.example.epidemic.vo.ResultBean;

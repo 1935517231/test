@@ -157,7 +157,7 @@ public class UserHeatlthServiceImpl implements UserHeatlthService {
         //2.分页
         PageHelper.startPage(page, limit);
         //3.获取分页结果
-        PageInfo<User> pageInfo=new PageInfo<>(dao.selectWhere(name));
+        PageInfo<UserHeatlthAdmin> pageInfo=new PageInfo<>(dao.selectWhere(name));
         //4.返回分页的数据
         return PageBean.bean(pageInfo.getTotal(), pageInfo.getList());
     }

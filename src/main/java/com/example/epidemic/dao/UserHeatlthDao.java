@@ -30,7 +30,7 @@ public interface UserHeatlthDao {
 
     int update(UserHeatlth userHeatlth);
 
-    List<User> selectWhere(@Param("name") String name);
+    List<UserHeatlthAdmin> selectWhere(@Param("name") String name);
 
     int addBatch(List<UserHeathAdminExcel> list);
     int addOwnHealth(OwnHealth ownHealth);

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.epidemic.dao.UserHeatlthDao">
+    <resultMap id="userBaseResult" type="com.example.epidemic.entity.User">
+        <id column="id" property="id"></id>
+        <result column="name" property="name"></result>
+        <result column="password" property="password"></result>
+        <result column="phone" property="phone"></result>
+        <result column="idcard" property="idCard"></result>
+        <result column="age" property="age"></result>
+        <result column="sex" property="sex"></result>
+        <result column="origin" property="origin"></result>
+        <result column="address" property="address"></result>
+        <result column="ctime" property="ctime"></result>
+        <result column="flag" property="flag"></result>
+    </resultMap>
+
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
+        insert into t_heatlth (id, uid, plcondition, seltemp, seltemptime, bytemptime, bytemp, aid, flag)
+        VALUES
+        (#{id},#{uId},#{plcondition},#{seltemp},#{seltemptime},#{bytemptime},#{bytemp},#{aId},#{flag})
+    </insert>
+
+    <insert id="addBatch" useGeneratedKeys="true" keyProperty="id">
+        insert into t_heatlth (id, uid, plcondition, seltemp, seltemptime, bytemptime, bytemp, aid, flag)
+        VALUES
+        <foreach collection="list" separator="," item="User">
+            (#{id},#{uId},#{plcondition},#{seltemp},#{seltemptime},#{bytemptime},#{bytemp},#{aId},#{flag})
+        </foreach>
+    </insert>
+
+    <insert id="addOwnHealth" keyProperty="id" useGeneratedKeys="true">
+        insert into t_ownhealth (id, uid, temp, ctime, flag) VALUES
+        (#{id},#{uid},#{temp},#{ctime},#{flag})
+    </insert>
+
+    <delete id="del">
+        delete from t_heatlth where id = #{id}
+    </delete>
+
+    <delete id="delBatch">
+        delete from t_heatlth where id in (
+            <foreach collection="dis" separator="," item="id">
+                #{id}
+            </foreach>
+            )
+    </delete>
+
+    <update id="update">
+        update t_heatlth
+        update t_user
+        <set>
+            <if test="id != null">id = #{id},</if>
+            <if test="uId != null and uId != ''">uId = #{uId},</if>
+            <if test="plCondition != null and plCondition != ''">plCondition = #{plCondition},</if>
+            <if test="selTemp != null and selTemp != ''">selTemp = #{selTemp},</if>
+            <if test="selTempTime != null ">selTempTime = #{selTempTime},</if>
+            <if test="byTempTime != null ">byTempTime = #{byTempTime},</if>
+            <if test="byTemp != null and byTemp != ''">byTemp = #{byTemp},</if>
+            <if test="aId != null ">aId = #{aId},</if>
+            <if test="flag != null">flag = #{flag},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+<!--    <select id="selectWhere" resultMap="userBaseResult">-->
+<!--        select * from t_user where name like #{name}-->
+<!--    </select>-->
+    <resultMap id="BaseResult" type="com.example.epidemic.dto.UserHeatlthAdmin">
+        <id column="id" property="id"></id>
+        <result column="uId" property="uId"></result>
+        <result column="name" property="name"></result>
+        <result column="selTemp" property="selTemp"></result>
+        <result column="selTempTime" property="selTempTime"></result>
+        <result column="byTemp" property="byTemp"></result>
+        <result column="byTempTime" property="byTempTime"></result>
+        <result column="plCondition" property="plCondition"></result>
+        <result column="aId" property="aId"></result>
+        <result column="flag" property="flag"></result>
+        <result column="adminName" property="adminName"></result>
+    </resultMap>
+
+    <select id="selectWhere" resultType="com.example.epidemic.dto.UserHeatlthAdmin">
+        select th.id as id,
+               tu.id as uId,
+               tu.name as name,
+               th.seltemp as seltemp,
+               th.selTempTime as selTempTime,
+               th.byTemp as byTemp,
+               th.byTempTime as byTempTime,
+               th.plCondition as plCondition,
+               aa.id as aId,
+               th.flag as flag,
+               aa.name as adminName
+        from t_heatlth th inner join t_user tu on th.uid = tu.id inner join a_admin aa on th.aid = aa.id
+        <if test="name != null and name != ''">
+            where tu.name like #{name}
+        </if>
+    </select>
+
+    <select id="selectWhereByOne" resultType="com.example.epidemic.dto.OwnHealthDto">
+        select t_ownhealth.id as id,
+               uid,
+               name,
+               temp,
+               t_ownhealth.temp as temp,
+               t_ownhealth.flag as flag
+        from t_ownhealth inner join t_user tu  on uid = tu.id
+        <if test="name != null and name != ''">
+            where tu.name like #{name}
+        </if>
+    </select>
+</mapper>
